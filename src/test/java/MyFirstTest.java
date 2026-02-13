@@ -1,6 +1,8 @@
 
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import com.microsoft.playwright.junit.Options;
 import com.microsoft.playwright.junit.OptionsFactory;
 import com.microsoft.playwright.junit.UsePlaywright;
@@ -12,6 +14,8 @@ import java.util.Arrays;
 
 @UsePlaywright(MyFirstTest.MyOption.class)
 public class MyFirstTest {
+
+    private Playwright playwright;
 
     public static class MyOption implements OptionsFactory{
 
