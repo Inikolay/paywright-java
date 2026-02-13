@@ -29,6 +29,7 @@ public class MyFirstTest {
         }
     }
 
+    //Add new test
     @Test
     void myTest(Page page) {
         page.navigate("https://practicesoftwaretesting.com/");
