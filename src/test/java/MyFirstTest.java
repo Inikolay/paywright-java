@@ -1,31 +1,31 @@
 
-import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.junit.Options;
-import com.microsoft.playwright.junit.OptionsFactory;
+import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.junit.UsePlaywright;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 
 
-@UsePlaywright(MyFirstTest.MyOption.class)
+@UsePlaywright(HeadClassChromeOptions.class)
 public class MyFirstTest {
 
-    public static class MyOption implements OptionsFactory{
+    protected static Playwright playwright;
+    protected static Browser browser;
+    protected static BrowserContext browserContext;
+    protected static Page page;
 
-        @Override
-        public Options getOptions() {
-            return new Options().setHeadless(false)
-                    .setLaunchOptions(
-                            new BrowserType.LaunchOptions()
-                            .setArgs(Arrays.asList("--no-sandbox","--disable-gpu"))
-                    );
-        }
+
+    @BeforeEach
+    void setUp(){
+        browserContext = browser.newContext();
+        page = browserContext.newPage();
     }
 
-    //Add new tests
     @Test
     void myTest(Page page) {
         page.navigate("https://practicesoftwaretesting.com/");
@@ -38,5 +38,11 @@ public class MyFirstTest {
         page.navigate("https://practicesoftwaretesting.com/");
         page.locator("#search-query").fill("Pliers");
         page.locator("button[data-test='search-submit']").click();
+    }
+
+    @AfterAll
+    static void tearDown(){
+        browser.close();
+        playwright.close();
     }
 }
