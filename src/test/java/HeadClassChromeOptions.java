@@ -17,7 +17,7 @@ public class HeadClassChromeOptions implements OptionsFactory {
                                 "--start-maximized",
                                 "--disable-extensions",
                                 "--incognito"
-                        )).setHeadless(true)
+                        ))
         );
     }
 }
